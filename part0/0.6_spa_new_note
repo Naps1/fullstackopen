@@ -1,0 +1,25 @@
+```mermaid
+sequenceDiagram
+    
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa
+    server-->>browser: HTML document
+    
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    server-->>browser: CSS file
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+    server-->>browser: spa.js JavaScript file
+    
+    Note right of browser: Browser starts executing JavaScript code that requests JSON data from the server.
+    
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    server-->>browser: data.json containing raw data of the notes
+
+    Note right of browser: Browser renders notes.
+    
+    Note over browser: User creates a new note.
+    Note right of browser: New note is added to the list of notes and the list is rerendered.<br/>JSON data containing the note and timestamp is sent to server.
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+    server-->>browser: Status: 201 Created
+    Note left of server: Server responds with status code 201 and a message: "note created"
+```
